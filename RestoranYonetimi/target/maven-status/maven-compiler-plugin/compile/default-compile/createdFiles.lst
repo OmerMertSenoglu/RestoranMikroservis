@@ -1,0 +1,5 @@
+com\restoransistemi\service\RestaurantService.class
+com\restoransistemi\controller\RestaurantController.class
+com\restoransistemi\repository\RestaurantRepository.class
+com\restoransistemi\RestaurantManagementApplication.class
+com\restoransistemi\model\Restaurant.class
