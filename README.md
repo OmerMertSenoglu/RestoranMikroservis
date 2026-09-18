@@ -4,10 +4,10 @@ Restoran, rezervasyon ve API Gateway servislerinden oluşan Spring Boot mikroser
 
 ## Mimari
 
-| Servis | Port | Gorev |
-| --- | ---: | --- |
-| Gateway | 8085 | Istekleri mikroservislere yonlendirir |
-| Restoran Yonetimi | 8080 | Restoran CRUD islemleri |
+| Servis              | Port | Gorev                                              |
+| ------------------- | ---: | -------------------------------------------------- |
+| Gateway             | 8085 | Istekleri mikroservislere yonlendirir              |
+| Restoran Yonetimi   | 8080 | Restoran CRUD islemleri                            |
 | Rezervasyon Sistemi | 8082 | Rezervasyon CRUD islemleri ve restoran dogrulamasi |
 
 Gateway uzerinden istekler su sekilde yonlendirilir:
