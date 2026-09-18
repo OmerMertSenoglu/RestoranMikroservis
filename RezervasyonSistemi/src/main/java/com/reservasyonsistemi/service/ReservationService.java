@@ -5,7 +5,6 @@ import com.reservasyonsistemi.model.Reservation;
 import com.reservasyonsistemi.model.ReservationDetail;
 import com.reservasyonsistemi.model.RestaurantDTO;
 import com.reservasyonsistemi.repository.ReservationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +16,6 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final RestaurantFeignClient restaurantFeignClient;
 
-    @Autowired
     public ReservationService(ReservationRepository reservationRepository, RestaurantFeignClient restaurantFeignClient) {
         this.reservationRepository = reservationRepository;
         this.restaurantFeignClient = restaurantFeignClient;
@@ -37,9 +35,11 @@ public class ReservationService {
     }
 
     public Optional<ReservationDetail> getReservationById(Long id) {
-        var reservation = reservationRepository.findById(id);
-        RestaurantDTO restaurant = restaurantFeignClient.getRestaurantById(reservation.get().getRestaurantId());
-        return Optional.of(new ReservationDetail(reservation.get(), restaurant));
+        return reservationRepository.findById(id)
+                .map(reservation -> {
+                    RestaurantDTO restaurant = restaurantFeignClient.getRestaurantById(reservation.getRestaurantId());
+                    return new ReservationDetail(reservation, restaurant);
+                });
     }
 
     public Optional<Reservation> updateReservation(Long id, Reservation updatedReservation) {
